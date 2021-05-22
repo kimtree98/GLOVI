@@ -1,0 +1,48 @@
+{% extends 'video/base.html' %}
+
+{% block title %}Video List{% endblock %}
+{% block pageName %}Video List{% endblock %}
+
+{% block content %}
+<div style="float:left; width:75%;">
+
+    <form action="" method='GET'>
+        <div class="row" style="margin-bottom:10px;">
+            <div class="col-lg-6">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="search_key" value="{{ search_key }}"
+                        placeholder="looking for...">
+                    <span class="input-group-btn">
+                        <input class="btn btn-default" type="submit" value="Search">
+                    </span>
+                </div><!-- /input-group -->
+            </div><!-- /.col-lg-6 -->
+        </div><!-- /.row -->
+    </form>
+    <div class="row">
+        {% for video in video_list %}
+        <div id="video_list_search" class="col-md-5" style="float: left; margin-bottom: 30px; margin-right: 30px;">
+            <a href="{% url 'video_detail' pk=video.id %}">
+                <img src="http://img.youtube.com/vi/{{video.video_key}}/mqdefault.jpg" alt="thumbnail">
+                <h4>
+                    {{ video.title }}
+            </a>
+            <span class="glyphicon glyphicon-heart" style="color:red"></span>{{ video.count_likes_user }}
+            </h4>
+            <h5>{{ video.upload_date }}&nbsp;&nbsp;by.{{ video.author }}</h5>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div style="float:right; margin-right: 100px;">
+    <div class="list-group">
+        <a href="{% url 'video_list' %}" class="list-group-item active">
+            All
+        </a>
+        {% for category in Category %}
+        <a href="{% url 'video_category' category=category.value %}" class="list-group-item" style="width: 150px;">{{category.label}}</a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

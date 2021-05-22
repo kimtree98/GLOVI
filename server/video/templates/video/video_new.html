@@ -1,0 +1,32 @@
+{% extends 'video/base.html' %}
+
+{% block title %}New Video{% endblock %}
+{% block pageName %}New Video{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-5">
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" name="title" class="form-control" id="title" placeholder="Title">
+            </div>
+            <div class="form-group">
+                <label for="category">Category</label>
+                <select class="form-control" name="category" class="form-control" id="category" style="width:150px;">
+                    <option>-</option>
+                    {% for category in Category %}
+                    <option value="{{category.value}}">{{category.label}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="video_key">Video Key</label>
+                <input type="text" name="video_key" class="form-control" id="video_key" placeholder="ex) https://www.youtube.com/watch?v=<video key>">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

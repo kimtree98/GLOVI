@@ -1,0 +1,15 @@
+{% extends 'video/base.html' %}
+
+{% block title %}My Likes{% endblock %}
+{% block pageName %}My Likes{% endblock %}
+
+{% block content %}
+    {% for video in likesVideo %}
+    <div class="col-md-12">
+        <a href="{% url 'video_detail' pk=video.id %}">
+            <h4>{{ video.title }}</h4>
+        </a>
+        <h6>{{ video.upload_date }}</h6>
+    </div>
+    {% endfor %}
+{% endblock %}
